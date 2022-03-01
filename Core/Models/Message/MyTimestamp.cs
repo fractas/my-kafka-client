@@ -1,22 +1,22 @@
-namespace MyKafkaClient.Core.Models.Message ;
+namespace MyKafkaClient.Core.Models.Message;
 
-    public interface IMyTimestamp
+public interface IMyTimestamp
+{
+    DateTime UtcDateTime { get; }
+}
+
+public sealed class MyTimestamp : IMyTimestamp
+{
+    public MyTimestamp() : this(DateTime.UtcNow)
     {
-        DateTime UtcDateTime { get; }
     }
 
-    public sealed class MyTimestamp : IMyTimestamp
+    public MyTimestamp(DateTime utc)
     {
-        public MyTimestamp() : this(DateTime.UtcNow)
-        {
-        }
+        ArgumentNullException.ThrowIfNull(utc);
 
-        public MyTimestamp(DateTime utc)
-        {
-            ArgumentNullException.ThrowIfNull(utc);
-
-            UtcDateTime = utc.ToUniversalTime();
-        }
-
-        public DateTime UtcDateTime { get; }
+        UtcDateTime = utc.ToUniversalTime();
     }
+
+    public DateTime UtcDateTime { get; }
+}
