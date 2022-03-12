@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message MyEntity {
+  string id = 1;
+}
+
+message MyEntityCreated {
+  MyEntity my_entity = 1;
+}
